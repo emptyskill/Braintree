@@ -35,6 +35,11 @@ logo = ("""
 \x1b[1;91m \x1b[1;46m\033[1;91m ✅ NOT JUST A BRAINTREE CHECKER\033[;0m\033[1;91m\033[1;92m
 \x1b[1;95m┗───────────────────────────────────────────────┛
 """)
+def linex():
+        print("\x1b[1;94m"+"━"*40+"\x1b[0;1m")
+def clear():
+        os.system(f'clear')
+        print(logo)
 def main():
     while True:
         # Display menu
