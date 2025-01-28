@@ -9,6 +9,7 @@ def main():
         print("1. Braintree 1")
         print("2. Braintree 2")
         print("3. Stripe Auth")
+        print("3. Bin Generator")
         print("4. Quit")
 
         # Get user input
